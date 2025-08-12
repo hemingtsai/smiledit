@@ -3,6 +3,9 @@
 <!-- 设置页面标题 -->
 <title><?php $this->options->title(); ?><?php $this->archiveTitle(); ?></title>
 
+<!-- 引入字体 -->
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
 <!-- 引入CSS样式表 -->
 <link rel="stylesheet" type="text/css" media="all" href="<?php $this->options->themeUrl('css/main.css'); ?>" />
 
