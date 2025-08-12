@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <meta http-equiv="content-type" content="text/html; charset=<?php $this->options->charset(); ?>" />
 
 <!-- 设置页面标题 -->
@@ -5,9 +7,16 @@
 
 <!-- 引入字体 -->
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+@import url("https://fontsapi.zeoseven.com/161/main/result.css");
+
+*{
+    font-family: 'Josefin Sans', 'Sarasa Gothic SC';
+}
+</style>
 
 <!-- 引入CSS样式表 -->
-<link rel="stylesheet" type="text/css" media="all" href="<?php $this->options->themeUrl('css/main.css'); ?>" />
+<link rel="stylesheet" type="text/css" media="all" href="<?php $this->options->themeUrl('style.css'); ?>" />
 
 <!-- Typecho 其它HTML头部信息 -->
 <?php $this->header(); ?>
@@ -26,6 +35,8 @@
         <span><?php $this->options->description() ?></span>
     </div>
 
+    <div style="flex-grow:1;"> </div>
+
     <!-- 搜索 -->
     <form method="post" action="">
         <div><input type="text" name="s" class="text" size="32" /> <input type="submit" class="submit" value="Search" /></div>
@@ -33,8 +44,8 @@
 </div>
 
 <!-- 独立页面列表 -->
-<ul class="clearfix" id="nav_menu">
-    <li><a href="<?php $this->options->siteUrl(); ?>">Home</a></li>
+<div class="independent-page-menu" id="nav_menu">
+    <a href="<?php $this->options->siteUrl(); ?>">Home</a>
     <?php $this->widget('Widget_Contents_Page_List')
-        ->parse('<li><a href="{permalink}">{title}</a></li>'); ?>
-</ul>
+        ->parse('<a href="{permalink}">{title}</a>'); ?>
+</div>
