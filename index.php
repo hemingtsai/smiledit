@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 首页模板
  *
@@ -32,7 +33,7 @@ $this->need('header.php');
                 </div>
             </article>
         <?php endwhile; ?>
-
+        
         <nav class="page-navi" aria-label="分页导航">
             <?php $this->pageNav('&laquo; PREV', 'NEXT &raquo;'); ?>
         </nav>

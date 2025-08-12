@@ -31,7 +31,7 @@
 <div style="display:flex">
     <!-- 网站标题 -->
     <div>
-        <h1><a href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title() ?></a></h1>
+        <h1><?php $this->options->title() ?></h1>
         <span><?php $this->options->description() ?></span>
     </div>
 
@@ -45,7 +45,7 @@
 
 <!-- 独立页面列表 -->
 <div class="independent-page-menu" id="nav_menu">
-    <a href="<?php $this->options->siteUrl(); ?>">Home</a>
+    <a href="<?php $this->options->siteUrl(); ?>">主页</a>
     <?php $this->widget('Widget_Contents_Page_List')
         ->parse('<a href="{permalink}">{title}</a>'); ?>
 </div>
