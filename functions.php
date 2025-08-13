@@ -24,13 +24,17 @@ function parseContent($content)
     }
 
     // <img> 添加 data-action
+    // 移除图片的内联样式并添加类名
     $fimg = array();
     preg_match_all('/<img (.*?)>/', $content, $img);
     $num = count($img[0]);
 
     for ($i = 0; $i < $num; $i++) {
         $f = $img[1][$i];
-        $ff = '<img data-action="zoom" ' . $f . '>';
+        // 移除 style 属性
+        $f = preg_replace('/style=".*?"/i', '', $f);
+        // 添加 class="responsive-img"
+        $ff = '<img class="responsive-img" ' . $f . '>';
 
         array_push($fimg, $ff);
     }
@@ -89,4 +93,12 @@ function post_config($thiss)
     }
 
     return $rst;
+}
+
+function filter_image_attributes($content) {
+    // 使用正则表达式移除图片的内联样式
+    $content = preg_replace('/<img(.*?)style=".*?"(.*?)>/i', '<img$1$2>', $content);
+    // 为图片添加 class="responsive-img"
+    $content = preg_replace('/<img(.*?)>/i', '<img$1 class="responsive-img">', $content);
+    return $content;
 }

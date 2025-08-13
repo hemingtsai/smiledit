@@ -258,6 +258,16 @@ form input.submit:hover {
     color: var(--text-color);
 }
 
+/* 针对 entry_text 内图片强制限制宽度，防止被内联样式或外部样式覆盖 */
+.entry_text img,
+.entry_text .responsive-img {
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+}
+
 /* 分页导航 */
 .page-navi {
     display: flex;
@@ -286,6 +296,20 @@ p, ul, ol, blockquote, pre {
     margin-left: 1em;
     margin-top: 1rem;
     margin-bottom: 1rem;
+}
+
+/* 限制图片最大宽度以防止超出容器 */
+img {
+    max-width: 100%;
+    height: auto;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+/* 确保图片的父容器不会超出宽度 */
+.container, .content, .primary-content, .sidebar {
+    max-width: 100%;
+    overflow: hidden;
 }
 
 /* 响应式 */
