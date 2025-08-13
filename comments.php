@@ -1,43 +1,78 @@
-<h4><?php $this->commentsNum('No Response', 'One Response to"' . $this->title . '"', '%d Responses to "' . $this->title . '"'); ?></h4>
-<ol id="comment_list">
-    <?php $this->comments()->to($comments); ?>
-    <?php while ($comments->next()): ?>
-        <li id="<?php $comments->theId(); ?>">
-            <div class="comment_data">
-                <?php echo $comments->sequence(); ?>.
-                <strong><?php $comments->author(); ?></strong>
-                on <?php $comments->date('F jS, Y'); ?> at <?php $comments->date('h:i a'); ?>
-            </div>
-            <div class="comment_body"><?php $comments->content(); ?></div>
-        </li>
-    <?php endwhile; ?>
-</ol>
+<?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 
-<!-- 判断设置是否允许对当前文章进行评论 -->
+<h4 id="comments_title">
+    <?php $this->commentsNum(
+        'No comment',
+        'One comment to "' . htmlspecialchars($this->title) . '"',
+        '%d comments to "' . htmlspecialchars($this->title) . '"'
+    ); ?>
+</h4>
+
+<?php $this->comments()->to($comments); ?>
+
+<?php if ($comments->have()): ?>
+    <ol id="comment_list">
+        <?php while ($comments->next()): ?>
+            <li id="comment-<?php $comments->theId(); ?>" class="comment">
+                <div class="comment_data">
+                    <span class="comment_number">#<?php $comments->sequence(); ?></span>
+                    <strong class="comment_author"><?php $comments->author(); ?></strong>
+                    <span class="comment_meta">
+                        on <?php $comments->date('F jS, Y'); ?> at <?php $comments->date('h:i a'); ?>
+                    </span>
+                </div>
+
+                <div class="comment_body">
+                    <?php $comments->content(); ?>
+                </div>
+
+                <div class="comment_reply">
+                    <?php $comments->reply(); ?>
+                </div>
+
+                <?php if ($comments->children): ?>
+                    <div class="comment_children">
+                        <?php $comments->threadedComments($comments, $this); ?>
+                    </div>
+                <?php endif; ?>
+            </li>
+        <?php endwhile; ?>
+    </ol>
+<?php endif; ?>
+
 <?php if ($this->allow('comment')): ?>
+    <h4 id="response"><?php _e('Leave a Reply'); ?></h4>
 
-    <h4 id="response">Leave a Reply</h4>
-
-    <!-- 输入表单开始 -->
-    <form method="post" action="<?php $this->commentUrl() ?>" id="comment_form">
-
-        <!-- 如果当前用户已经登录 -->
+    <form method="post" action="<?php $this->commentUrl(); ?>" id="comment_form">
         <?php if ($this->user->hasLogin()): ?>
-            <!-- 显示当前登录用户的用户名以及登出连接 -->
-            <p>Logged in as <a href="<?php $this->options->adminUrl(); ?>"><?php $this->user->screenName(); ?></a>.
-                <a href="<?php $this->options->index('Logout.do'); ?>" title="Logout">Logout &raquo;</a>
+            <p>
+                <?php _e('Logged in as '); ?>
+                <a href="<?php $this->options->adminUrl(); ?>"><?php $this->user->screenName(); ?></a>.
+                <a href="<?php $this->options->logoutUrl(); ?>" title="Logout"><?php _e('Logout »'); ?></a>
             </p>
-
-            <!-- 若当前用户未登录 -->
         <?php else: ?>
-            <!-- 要求输入名字、邮箱、网址 -->
-            <p><input type="text" name="author" class="text" size="35" value="<?php $this->remember('author'); ?>" /><label>Name (Required)</label></p>
-            <p><input type="text" name="mail" class="text" size="35" value="<?php $this->remember('mail'); ?>" /><label>E-mail (Required *will not be published)</label></p>
-            <p><input type="text" name="url" class="text" size="35" value="<?php $this->remember('url'); ?>" /><label>Website</label></p>
+            <p>
+                <label>Name</label>
+                <input type="text" name="author" class="text" size="35"
+                    value="<?php $this->remember('author'); ?>" required>
+            </p>
+            <p>
+                <label>E-mail</label>
+                <input type="email" name="mail" class="text" size="35"
+                    value="<?php $this->remember('mail'); ?>" required>
+            </p>
+            <p>
+                <label>Website</label>
+                <input type="url" name="url" class="text" size="35"
+                    value="<?php $this->remember('url'); ?>">
+            </p>
         <?php endif; ?>
 
-        <!-- 输入要回复的内容 -->
-        <p><textarea rows="10" cols="50" name="text"><?php $this->remember('text'); ?></textarea></p>
-        <p><input type="submit" value="Submit Comment" class="submit" /></p>
+        <p>
+            <textarea rows="10" cols="50" name="text" required><?php $this->remember('text'); ?></textarea>
+        </p>
+        <p>
+            <input type="submit" value="Submit Comment" class="submit">
+        </p>
     </form>
 <?php endif; ?>

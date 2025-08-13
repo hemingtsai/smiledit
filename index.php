@@ -1,5 +1,4 @@
 <?php
-
 /**
  * 首页模板
  *
@@ -13,7 +12,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $this->need('header.php');
 ?>
 
-<div id="main-content" style="display:flex;">
+<div id="main-content">
     <main class="primary-content">
         <?php while ($this->next()): ?>
             <article class="post">
@@ -22,19 +21,19 @@ $this->need('header.php');
                 </h2>
 
                 <div class="entry_data">
-                    由 <a href="<?php $this->author->permalink(); ?>"><?php $this->author(); ?></a>
-                    在 <?php $this->date('F j, Y'); ?>
-                    <?php $this->category(','); ?>.
-                    <?php $this->commentsNum('%d 条评论'); ?>.
+                    Published by <a href="<?php $this->author->permalink(); ?>"><?php $this->author(); ?></a>
+                    on <?php $this->date('F j, Y'); ?>
+                    in <?php $this->category(','); ?>
+                    with <?php $this->commentsNum('%d Comments'); ?>.
                 </div>
 
                 <div class="entry_text">
-                    <?php $this->content('继续阅读...'); ?>
+                    <?php $this->content('Read more...'); ?>
                 </div>
             </article>
         <?php endwhile; ?>
-        
-        <nav class="page-navi" aria-label="分页导航">
+
+        <nav class="page-navi">
             <?php $this->pageNav('&laquo; PREV', 'NEXT &raquo;'); ?>
         </nav>
     </main>

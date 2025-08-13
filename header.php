@@ -8,11 +8,11 @@
 <!-- 引入字体 -->
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <style>
-@import url("https://fontsapi.zeoseven.com/161/main/result.css");
+    @import url("https://fontsapi.zeoseven.com/161/main/result.css");
 
-*{
-    font-family: 'Josefin Sans', 'Sarasa Gothic SC';
-}
+    * {
+        font-family: 'Josefin Sans', 'Sarasa Gothic SC';
+    }
 </style>
 
 <!-- 引入CSS样式表 -->
@@ -39,7 +39,10 @@
 
     <!-- 搜索 -->
     <form method="post" action="">
-        <div><input type="text" name="s" class="text" size="32" /> <input type="submit" class="submit" value="Search" /></div>
+        <div style="display:flex; gap:0.5rem; align-items:center;">
+            <input type="text" name="s" class="text" size="32" placeholder="搜索..." />
+            <input type="submit" class="submit" value="Search" />
+        </div>
     </form>
 </div>
 

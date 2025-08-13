@@ -81,68 +81,79 @@ div[style*="flex-grow:1"] {
     flex-grow: 1;
 }
 
-/* 搜索框样式 */
-form {
-    margin-left: auto;
-}
-
-form div {
-    display: flex;
-    gap: 0.5rem;
-}
-
-input.text {
-    padding: 0.4rem 0 0.4rem 0;
+/* 搜索框样式（下划线统一版） */
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+textarea {
     border: none;
-    border-bottom: 2px solid #ccc;
-    font-size: 1rem;
-    width: 180px;
+    border-bottom: 2px solid var(--border-color);
     background: transparent;
-    position: relative;
-    transition: border-color 0.3s ease;
     border-radius: 0;
+    padding: 0.4rem 0;
+    font-size: 1rem;
+    width: 100%;
     color: var(--text-color);
+    transition: border-color 0.3s ease;
 }
 
-input.text:focus {
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus {
     outline: none;
     border-bottom-color: var(--primary-color);
 }
 
-input.text::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 2px;
-    width: 0;
-    background-color: var(--primary-color);
-    transition: width 0.3s ease;
+form > div {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
 }
 
-input.text:focus::after {
-    width: 100%;
-}
-
-/* 纯文字按钮样式 */
-input.submit {
-    background: none;
+form input.text {
+    flex: 1;
+    width: auto;
+    min-width: 0;
+    box-sizing: border-box;
     border: none;
-    padding: 0;
-    font-weight: 600;
-    color: var(--primary-color);
-    cursor: pointer;
-    transition: color 0.3s ease;
+    border-bottom: 2px solid var(--border-color);
+    background: transparent;
+    padding: 0.4rem 0.5rem;
     font-size: 1rem;
+    color: var(--text-color);
+    transition: border-color 0.3s ease;
 }
 
-input.submit:hover {
+form input.text:focus {
+    outline: none;
+    border-bottom-color: var(--primary-color);
+}
+
+form input.submit {
+    border: none;
+    border-bottom: 2px solid var(--background-color);
+    background: transparent;
+    color: var(--primary-color);
+    padding: 0.4rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+}
+
+form input.submit:hover {
     color: #e067c2;
+    border-bottom-color: #e067c2;
 }
 
 /* 页面菜单 */
 .independent-page-menu {
     margin-top: 1rem;
+    margin-bottom: 1rem;
     padding-top: 0.75rem;
     display: flex;
     flex-wrap: wrap;
@@ -223,21 +234,31 @@ input.submit:hover {
 
 #main-content {
     display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start; /* 取消垂直居中，内容顶对齐 */
+    align-items: flex-start;
 }
 
+/* 主内容区域 */
 .primary-content {
     flex: 1 1 80%;
     min-width: 280px;
+    padding-right: 2rem;
 }
 
+/* 边栏样式 */
 .sidebar {
     flex: 1 1 20%;
     min-width: 160px;
+    padding-left: 1rem;
+    box-sizing: border-box;
+    background-color: var(--background-color);
+}
+
+.sidebar > * {
+    margin-bottom: 1.5rem;
 }
 
 /* 响应式 */
+
 @media (max-width: 600px) {
     div[style*="display:flex"] {
         flex-direction: column;
@@ -271,6 +292,141 @@ input.submit:hover {
         flex: 1 1 100%;
         min-width: auto;
     }
+
+    .sidebar {
+        padding-left: 0;
+        margin-top: 1rem;
+        order: -1;
+        width: 100%;
+        background-color: var(--background-color);
+    }
+}
+
+@media (max-width: 375px) {
+    body {
+        padding: 0 0.5rem;
+        font-size: 0.95rem;
+    }
+    h1 {
+        font-size: 1.6rem;
+    }
+    .entry_title {
+        font-size: 1.4rem;
+    }
+    .independent-page-menu {
+        gap: 0.4rem;
+    }
+    #comment_form input.submit {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 1rem;
+    }
+    .primary-content, .sidebar {
+        flex: 1 1 100%;
+    }
+    .sidebar {
+        order: -1;
+    }
+    .post {
+        padding-bottom: 1rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    body {
+        font-size: 1.05rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+/* 边栏视觉分隔 */
+@media (min-width: 768px) {
+    .sidebar {
+        border-left: 1px solid var(--border-color);
+    }
+}
+
+@media (hover: none) {
+    a:hover::after {
+        width: 0;
+    }
+    input.submit:hover {
+        background: var(--primary-color);
+    }
+}
+
+/* 评论区样式 */
+#comments_title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-top: 3em;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.3rem;
+}
+
+#comment_list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#comment_list li {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--background-color);
+}
+
+.comment_data {
+    font-size: 0.9rem;
+    color: var(--muted-color);
+    margin-bottom: 0.5rem;
+}
+
+.comment_data .comment_number {
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.comment_author {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.comment_body {
+    line-height: 1.6;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.comment_reply {
+    margin-top: 0.5rem;
+}
+
+.comment_reply a {
+    font-size: 0.85rem;
+    color: var(--muted-color);
+    text-decoration: underline;
+}
+
+.comment_reply a:hover {
+    color: var(--primary-color);
+}
+
+.comment_children {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    border-left: 2px solid var(--border-color);
+    padding-left: 1rem;
 }
 
 /* 暗色模式 */
@@ -284,30 +440,28 @@ input.submit:hover {
         --muted-color: #bbb;
     }
 
-    body {
+    #comment_list li {
         background: var(--background-color);
-        color: var(--text-color);
+        border-color: var(--border-color);
     }
 
-
-    input.text {
-        border-bottom-color: #555;
-        color: var(--text-color);
-    }
-
-    input.text:focus {
-        border-bottom-color: var(--primary-color);
-    }
-
-    .post {
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .entry_data {
+    .comment_reply a {
         color: var(--muted-color);
     }
 
-    input.submit {
-        color: var(--primary-color);
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    input[type="password"],
+    textarea {
+        border-bottom-color: #555;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="url"]:focus,
+    input[type="password"]:focus,
+    textarea:focus {
+        border-bottom-color: var(--primary-color);
     }
 }
