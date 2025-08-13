@@ -1,3 +1,11 @@
+/* 基础重置和盒模型 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 主题色彩变量 */
 :root {
     --primary-color: #ff95d6ff;
     --background-color: #FFFFFF;
@@ -7,15 +15,15 @@
     --muted-color: #666;
 }
 
+/* 页面整体样式 */
 body {
-    margin: 0;
-    padding: 0 1rem;
+    padding: 1rem 2rem;
     font-family: 'Josefin Sans', 'Sarasa Gothic SC', sans-serif;
     background: var(--background-color);
     color: var(--text-color);
 }
 
-/* 链接及下划线 */
+/* 链接及下划线效果 */
 a {
     color: inherit;
     font-weight: 300;
@@ -55,7 +63,7 @@ div[style*="display:flex"] {
 }
 
 h1 {
-    margin: 0;
+    margin: 0 0 1rem 0;
     font-weight: 700;
     font-size: 2rem;
 }
@@ -79,6 +87,39 @@ div > div > span {
 
 div[style*="flex-grow:1"] {
     flex-grow: 1;
+}
+
+/* 统一内容最大宽度及居中 */
+#main-content {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    box-sizing: border-box;
+}
+
+/* 主内容区域 */
+.primary-content {
+    flex: 1 1 80%;
+    min-width: 280px;
+    padding: 1rem;
+}
+
+/* 边栏样式 */
+.sidebar {
+    flex: 1 1 20%;
+    min-width: 160px;
+    padding: 1rem;
+    background-color: var(--background-color);
+    box-sizing: border-box;
+}
+
+/* 边栏内元素垂直间距 */
+.sidebar > * {
+    margin-bottom: 1.5rem;
 }
 
 /* 搜索框样式（下划线统一版） */
@@ -107,10 +148,12 @@ textarea:focus {
     border-bottom-color: var(--primary-color);
 }
 
+/* 表单内部布局 */
 form > div {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
     align-items: center;
+    margin-bottom: 1rem;
 }
 
 form input.text {
@@ -215,6 +258,7 @@ form input.submit:hover {
     color: var(--text-color);
 }
 
+/* 分页导航 */
 .page-navi {
     display: flex;
     justify-content: space-between;
@@ -232,67 +276,39 @@ form input.submit:hover {
     color: var(--primary-color);
 }
 
-#main-content {
-    display: flex;
-    align-items: flex-start;
+/* 标题和文本元素统一上下间距 */
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
 }
 
-/* 主内容区域 */
-.primary-content {
-    flex: 1 1 80%;
-    min-width: 280px;
-    padding-right: 2rem;
-}
-
-/* 边栏样式 */
-.sidebar {
-    flex: 1 1 20%;
-    min-width: 160px;
-    padding-left: 1rem;
-    box-sizing: border-box;
-    background-color: var(--background-color);
-}
-
-.sidebar > * {
-    margin-bottom: 1.5rem;
+p, ul, ol, blockquote, pre {
+    margin-left: 1em;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 /* 响应式 */
 
+/* 小屏幕竖排，边栏置底 */
 @media (max-width: 600px) {
+    body {
+        padding: 1rem;
+    }
     div[style*="display:flex"] {
         flex-direction: column;
         align-items: flex-start;
     }
-
-    form {
-        margin-left: 0;
-        margin-top: 0.5rem;
-        width: 100%;
-    }
-
-    form div {
-        width: 100%;
-    }
-
-    input.text {
-        width: 100%;
-    }
-
-    .independent-page-menu {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
     #main-content {
         flex-direction: column;
+        padding: 0.5rem;
+        gap: 1rem;
     }
-
     .primary-content, .sidebar {
+        padding: 0.5rem;
         flex: 1 1 100%;
         min-width: auto;
     }
-
     .sidebar {
         padding-left: 0;
         margin-top: 1rem;
@@ -300,8 +316,19 @@ form input.submit:hover {
         width: 100%;
         background-color: var(--background-color);
     }
+    form div {
+        width: 100%;
+    }
+    input.text {
+        width: 100%;
+    }
+    .independent-page-menu {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 }
 
+/* 超小屏幕字体缩小 */
 @media (max-width: 375px) {
     body {
         padding: 0 0.5rem;
@@ -321,6 +348,7 @@ form input.submit:hover {
     }
 }
 
+/* 中屏幕优化 */
 @media (max-width: 768px) {
     body {
         font-size: 1rem;
@@ -336,6 +364,7 @@ form input.submit:hover {
     }
 }
 
+/* 大屏幕最大宽度限制居中 */
 @media (min-width: 1024px) {
     body {
         font-size: 1.05rem;
@@ -351,6 +380,7 @@ form input.submit:hover {
     }
 }
 
+/* 无hover设备优化 */
 @media (hover: none) {
     a:hover::after {
         width: 0;
