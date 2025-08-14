@@ -18,6 +18,6 @@
     </script>
 <?php endif; ?>
 
-<footer style="text-align:center; padding:1rem 0; border-top:1px solid var(--border-color); color: var(--muted-color); font-size: 0.9rem;">
+<footer style="text-align:center; padding:1rem 0; color: var(--muted-color); font-size: 0.9rem;">
     &copy; <?php echo date('Y'); ?> Hemingtsai Labs. All rights reserved.
 </footer>
