@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 首页模板
  *
@@ -25,10 +26,6 @@ $this->need('header.php');
                     on <?php $this->date('F j, Y'); ?>
                     in <?php $this->category(','); ?>
                     with <?php $this->commentsNum('%d Comments'); ?>.
-                </div>
-
-                <div class="entry_text">
-                    <?php $this->content('Read more...'); ?>
                 </div>
             </article>
         <?php endwhile; ?>

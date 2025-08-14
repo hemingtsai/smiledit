@@ -27,8 +27,10 @@
 <h3>Other Links</h3>
 <ul>
     <?php if ($this->user->hasLogin()): ?>
-        <li class="last"><a href="<?php $this->options->index('Logout.do'); ?>">Logout (<?php $this->user->screenName(); ?>)</a></li>
+        <li class="last"><a href="<?php $this->options->logoutUrl(); ?>">Logout (<?php $this->user->screenName(); ?>)</a></li>
     <?php else: ?>
         <li class="last"><a href="<?php $this->options->adminUrl('login.php'); ?>">Login</a></li>
     <?php endif; ?>
+    <li><a href="<?php $this->options->feedUrl(); ?>"><?php _e('文章 RSS'); ?></a></li>
+    <li><a href="<?php $this->options->commentsFeedUrl(); ?>"><?php _e('评论 RSS'); ?></a></li>
 </ul>

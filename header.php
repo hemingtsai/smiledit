@@ -7,6 +7,7 @@
 
     <!-- 引入字体 -->
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
         @import url("https://fontsapi.zeoseven.com/161/main/result.css");
 
@@ -70,7 +71,7 @@
 </head>
 
 <body>
-    <div style="display:flex; align-items:center; gap:1rem; padding:1rem;">
+    <div class="website-header">
         <!-- 网站标题 -->
         <div>
             <h1><?php $this->options->title() ?></h1>
@@ -81,7 +82,7 @@
 
         <!-- 搜索 -->
         <form method="post" action="" style="display:flex; gap:0.5rem; align-items:center;">
-            <input type="text" name="s" class="text" size="32" placeholder="Search..." />
+            <input type="text" name="s" class="text" size="32" placeholder="" />
             <input type="submit" class="submit" value="Search" />
         </form>
     </div>
