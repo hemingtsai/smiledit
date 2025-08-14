@@ -40,39 +40,42 @@
     </ol>
 <?php endif; ?>
 
+
 <?php if ($this->allow('comment')): ?>
     <h4 id="response"><?php _e('Leave a Reply'); ?></h4>
 
-    <form method="post" action="<?php $this->commentUrl(); ?>" id="comment_form">
-        <?php if ($this->user->hasLogin()): ?>
-            <p>
-                <?php _e('Logged in as '); ?>
-                <a href="<?php $this->options->adminUrl(); ?>"><?php $this->user->screenName(); ?></a>.
-                <a href="<?php $this->options->logoutUrl(); ?>" title="Logout"><?php _e('Logout »'); ?></a>
-            </p>
-        <?php else: ?>
-            <p>
-                <label>Name</label>
-                <input type="text" name="author" class="text" size="35"
-                    value="<?php $this->remember('author'); ?>" required>
-            </p>
-            <p>
-                <label>E-mail</label>
-                <input type="email" name="mail" class="text" size="35"
-                    value="<?php $this->remember('mail'); ?>" required>
-            </p>
-            <p>
-                <label>Website</label>
-                <input type="url" name="url" class="text" size="35"
-                    value="<?php $this->remember('url'); ?>">
-            </p>
-        <?php endif; ?>
-
-        <p>
-            <textarea rows="10" cols="50" name="text" required><?php $this->remember('text'); ?></textarea>
-        </p>
-        <p>
-            <input type="submit" value="Submit Comment" class="submit">
-        </p>
-    </form>
+   <form method="post" action="<?php $this->commentUrl() ?>" id="comment-form" role="form">
+                <?php if ($this->user->hasLogin()): ?>
+                    <p><?php _e('Logined as '); ?><a
+                            href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>. <a
+                            href="<?php $this->options->logoutUrl(); ?>" title="Logout"><?php _e('Logout'); ?> &raquo;</a>
+                    </p>
+                <?php else: ?>
+                    <p>
+                        <label for="author" class="required"><?php _e('Name'); ?></label>
+                        <input type="text" name="author" id="author" class="text"
+                               value="<?php $this->remember('author'); ?>" required/>
+                    </p>
+                    <p>
+                        <label
+                            for="mail"<?php if ($this->options->commentsRequireMail): ?> class="required"<?php endif; ?>><?php _e('Email'); ?></label>
+                        <input type="email" name="mail" id="mail" class="text"
+                               value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?> />
+                    </p>
+                    <p>
+                        <label
+                            for="url"<?php if ($this->options->commentsRequireURL): ?> class="required"<?php endif; ?>><?php _e('Website'); ?></label>
+                        <input type="url" name="url" id="url" class="text" placeholder="<?php _e('http://'); ?>"
+                               value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?> />
+                    </p>
+                <?php endif; ?>
+                <p>
+                    <label for="textarea" class="required"><?php _e('Content'); ?></label>
+                    <textarea rows="8" cols="50" name="text" id="textarea" class="textarea"
+                              required><?php $this->remember('text'); ?></textarea>
+                </p>
+                <p>
+                    <button type="submit" class="submit"><?php _e('Submit Comment'); ?></button>
+                </p>
+            </form>
 <?php endif; ?>
